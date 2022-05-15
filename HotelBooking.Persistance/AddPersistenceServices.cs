@@ -18,6 +18,7 @@ namespace HotelBooking.Persistance
             services.AddDbContext<HotelBookingDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("HotelConnectionString")));
             services.AddScoped(typeof(IAsyncRespository<>), typeof(BaseRepository<>));
+            services.AddScoped<IHotelRepository, HotelRepository>();
             return services;
         }
     }

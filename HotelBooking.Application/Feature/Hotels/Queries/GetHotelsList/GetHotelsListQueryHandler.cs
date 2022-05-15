@@ -13,16 +13,16 @@ namespace HotelBooking.Application.Feature.Hotels.Queries.GetHotelsList
 {
     public class GetHotelsListQueryHandler : IRequestHandler<GetHotelsListQuery, List<HotelsListVM>>
     {
-        private readonly IAsyncRespository<Hotel> _hotelRepository;
+        private readonly IHotelRepository _hotelRepository;
         private readonly IMapper _mapper;
-        public GetHotelsListQueryHandler(IMapper mapper, IAsyncRespository<Hotel> hotelRespository)
+        public GetHotelsListQueryHandler(IMapper mapper, IHotelRepository hotelRespository)
         {
             _mapper = mapper;
             _hotelRepository = hotelRespository;
         }
         public async Task<List<HotelsListVM>> Handle(GetHotelsListQuery request, CancellationToken cancellationToken)
         {
-            var allHotels = (await _hotelRepository.ListAllAsync()).OrderBy(x => x.Name);
+            var allHotels = (_hotelRepository.ListAllHotels()).OrderBy(x => x.Name);
             return _mapper.Map<List<HotelsListVM>>(allHotels);
         }
     }
