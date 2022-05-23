@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Domain.Entities
 {
+    [Serializable]
     public class Hotel
     {
         public Guid HotelId { get; set; }
